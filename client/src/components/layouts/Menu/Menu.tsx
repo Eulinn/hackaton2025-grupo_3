@@ -12,11 +12,11 @@ export default function Menu({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset className="max-h-screen! overflow-hidden bg-red-600 flex flex-col transition">
+      <SidebarInset className="bg-red-600 flex flex-col transition-[margin] mt-16 group-has-data-[collapsible=icon]/sidebar-wrapper:mt-12">
         <header
           className={cn(
             "flex border-b h-16 shrink-0 items-center gap-2 transition-[width,height,transform] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12",
-            "bg-white w-full"
+            "bg-white w-full fixed top-0"
           )}
         >
           <div className="flex items-center gap-2 px-4">
