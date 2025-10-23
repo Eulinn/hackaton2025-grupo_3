@@ -1,0 +1,285 @@
+{
+    "tabela": "cubo_primeiro_parto_filhas",
+    "descricao": "Cubo especializado para análise de performance das filhas dos touros especificamente no primeiro parto",
+    "versao": "1.0",
+    "criado_em": "2025-10-23",
+    "tipo": "VIEW_OTIMIZADA",
+    "total_registros": 217,
+    "diferencial": "Foco exclusivo no primeiro parto - métrica crítica para seleção genética e avaliação da precocidade reprodutiva",
+    "estatisticas_gerais": {
+        "touros_com_dados": 217,
+        "touros_alta_producao_primeiro_parto": 32,
+        "touros_amostra_representativa": 107,
+        "media_geral_primeiro_parto": 7269.24,
+        "melhor_media_primeiro_parto": 13217.25,
+        "total_filhas_analisadas": 5136
+    },
+    "campos_principais": {
+        "identificacao": {
+            "codigo_touro": {
+                "tipo": "VARCHAR",
+                "descricao": "Código único do touro reprodutor",
+                "exemplo": "FSC00370",
+                "uso": "Identificação primária para busca específica"
+            },
+            "nome_touro": {
+                "tipo": "VARCHAR",
+                "descricao": "Nome legível do touro reprodutor",
+                "exemplo": "Touro00370",
+                "uso": "Apresentação em relatórios"
+            }
+        },
+        "contadores_filhas": {
+            "total_filhas_primeiro_parto": {
+                "tipo": "INTEGER",
+                "descricao": "Número total de filhas com dados de primeiro parto",
+                "exemplo": 69,
+                "uso": "Avaliar representatividade estatística",
+                "importancia": "CRITICA"
+            },
+            "filhas_produtivas_primeiro_parto": {
+                "tipo": "INTEGER",
+                "descricao": "Número de filhas com produção > 0 no primeiro parto",
+                "exemplo": 69,
+                "uso": "Calcular taxa de sucesso no primeiro parto"
+            },
+            "filhas_improdutivas_primeiro_parto": {
+                "tipo": "INTEGER",
+                "descricao": "Número de filhas sem produção no primeiro parto",
+                "exemplo": 0,
+                "uso": "Identificar problemas reprodutivos precoces"
+            }
+        },
+        "metricas_producao": {
+            "media_producao_primeiro_parto": {
+                "tipo": "DECIMAL",
+                "descricao": "Média de produção de leite das filhas no primeiro parto",
+                "exemplo": 8189.24,
+                "uso": "Principal métrica de avaliação genética",
+                "importancia": "CRITICA"
+            },
+            "min_producao_primeiro_parto": {
+                "tipo": "DECIMAL",
+                "descricao": "Menor produção registrada no primeiro parto",
+                "exemplo": 2618.99,
+                "uso": "Avaliar pior caso das filhas"
+            },
+            "max_producao_primeiro_parto": {
+                "tipo": "DECIMAL",
+                "descricao": "Maior produção registrada no primeiro parto",
+                "exemplo": 11794.35,
+                "uso": "Avaliar potencial máximo das filhas"
+            },
+            "desvio_padrao_producao": {
+                "tipo": "DECIMAL",
+                "descricao": "Variabilidade na produção das filhas no primeiro parto",
+                "exemplo": 2289.71,
+                "uso": "Medir consistência genética"
+            }
+        },
+        "metricas_qualidade": {
+            "media_gordura_primeiro_parto": {
+                "tipo": "DECIMAL",
+                "descricao": "Média de kg de gordura produzidos no primeiro parto",
+                "exemplo": 272.51,
+                "uso": "Avaliar qualidade do leite das filhas"
+            },
+            "media_proteina_primeiro_parto": {
+                "tipo": "DECIMAL",
+                "descricao": "Média de kg de proteína produzidos no primeiro parto",
+                "exemplo": 254.71,
+                "uso": "Avaliar valor nutricional do leite"
+            },
+            "percentual_gordura_medio": {
+                "tipo": "DECIMAL",
+                "descricao": "Percentual médio de gordura no leite das filhas",
+                "exemplo": 3.33,
+                "uso": "Avaliar qualidade comercial do leite"
+            },
+            "percentual_proteina_medio": {
+                "tipo": "DECIMAL",
+                "descricao": "Percentual médio de proteína no leite das filhas",
+                "exemplo": 3.11,
+                "uso": "Avaliar valor proteico do leite"
+            }
+        },
+        "metricas_temporais": {
+            "media_idade_primeiro_parto_meses": {
+                "tipo": "DECIMAL",
+                "descricao": "Idade média das filhas no primeiro parto (em meses)",
+                "exemplo": 25.8,
+                "uso": "Avaliar precocidade reprodutiva herdada"
+            },
+            "media_dias_lactacao_primeiro_parto": {
+                "tipo": "DECIMAL",
+                "descricao": "Duração média da primeira lactação (em dias)",
+                "exemplo": 305,
+                "uso": "Avaliar persistência da primeira lactação"
+            }
+        }
+    },
+    "campos_calculados": {
+        "classificacoes": {
+            "classificacao_primeiro_parto": {
+                "tipo": "VARCHAR",
+                "descricao": "Classificação baseada na média de produção no primeiro parto",
+                "valores": [
+                    "ELITE_PRIMEIRO_PARTO (≥12.000L)",
+                    "EXCELENTE_PRIMEIRO_PARTO (≥10.000L)",
+                    "BOM_PRIMEIRO_PARTO (≥8.000L)",
+                    "REGULAR_PRIMEIRO_PARTO (≥6.000L)",
+                    "BAIXO_PRIMEIRO_PARTO (<6.000L)"
+                ],
+                "uso": "Classificação rápida da performance no primeiro parto",
+                "importancia": "ALTA"
+            },
+            "nivel_representatividade": {
+                "tipo": "VARCHAR",
+                "descricao": "Confiabilidade estatística baseada no número de filhas",
+                "valores": [
+                    "ALTA_REPRESENTATIVIDADE (≥20 filhas)",
+                    "MEDIA_REPRESENTATIVIDADE (≥10 filhas)",
+                    "BAIXA_REPRESENTATIVIDADE (≥5 filhas)",
+                    "REPRESENTATIVIDADE_MINIMA (<5 filhas)"
+                ],
+                "uso": "Filtrar por confiabilidade dos dados"
+            },
+            "nivel_consistencia": {
+                "tipo": "VARCHAR",
+                "descricao": "Consistência genética baseada no desvio padrão",
+                "valores": [
+                    "MUITO_CONSISTENTE (≤1.000L desvio)",
+                    "CONSISTENTE (≤2.000L desvio)",
+                    "MODERADAMENTE_VARIAVEL (≤3.000L desvio)",
+                    "ALTA_VARIABILIDADE (>3.000L desvio)"
+                ],
+                "uso": "Avaliar previsibilidade da herança genética"
+            },
+            "classificacao_precocidade": {
+                "tipo": "VARCHAR",
+                "descricao": "Precocidade reprodutiva baseada na idade média do primeiro parto",
+                "valores": [
+                    "PRECOCE (≤24 meses)",
+                    "NORMAL (≤30 meses)",
+                    "TARDIO (≤36 meses)",
+                    "MUITO_TARDIO (>36 meses)"
+                ],
+                "uso": "Selecionar touros para melhoria da precocidade"
+            }
+        },
+        "indicadores_boolean": {
+            "alta_producao_primeiro_parto": {
+                "tipo": "BOOLEAN",
+                "descricao": "Indica se média do primeiro parto ≥ 10.000L",
+                "uso": "Filtrar touros de elite para primeiro parto"
+            },
+            "amostra_representativa": {
+                "tipo": "BOOLEAN",
+                "descricao": "Indica se tem ≥ 10 filhas analisadas",
+                "uso": "Filtrar dados estatisticamente confiáveis"
+            },
+            "genetica_consistente": {
+                "tipo": "BOOLEAN",
+                "descricao": "Indica se desvio padrão ≤ 2.000L",
+                "uso": "Identificar touros com herança previsível"
+            },
+            "reproducao_precoce": {
+                "tipo": "BOOLEAN",
+                "descricao": "Indica se idade média primeiro parto ≤ 30 meses",
+                "uso": "Selecionar para melhoramento da precocidade"
+            },
+            "boa_qualidade_gordura": {
+                "tipo": "BOOLEAN",
+                "descricao": "Indica se % gordura média ≥ 3.5%",
+                "uso": "Filtrar touros para qualidade do leite"
+            },
+            "boa_qualidade_proteina": {
+                "tipo": "BOOLEAN",
+                "descricao": "Indica se % proteína média ≥ 3.2%",
+                "uso": "Filtrar touros para valor proteico"
+            }
+        }
+    },
+    "queries_exemplo": {
+        "consulta_touro_especifico": {
+            "sql": "SELECT * FROM cubo_primeiro_parto_filhas WHERE codigo_touro = 'FSC00370'",
+            "descricao": "Buscar dados completos de um touro específico"
+        },
+        "ranking_primeiro_parto": {
+            "sql": "SELECT nome_touro, codigo_touro, media_producao_primeiro_parto, total_filhas_primeiro_parto FROM cubo_primeiro_parto_filhas WHERE amostra_representativa = true ORDER BY media_producao_primeiro_parto DESC LIMIT 10",
+            "descricao": "Top 10 touros por média no primeiro parto (amostras confiáveis)"
+        },
+        "touros_elite_primeiro_parto": {
+            "sql": "SELECT * FROM cubo_primeiro_parto_filhas WHERE alta_producao_primeiro_parto = true AND genetica_consistente = true",
+            "descricao": "Touros elite com genética consistente no primeiro parto"
+        },
+        "estatisticas_por_classificacao": {
+            "sql": "SELECT classificacao_primeiro_parto, COUNT(*) as total, ROUND(AVG(media_producao_primeiro_parto), 2) as media FROM cubo_primeiro_parto_filhas GROUP BY classificacao_primeiro_parto ORDER BY media DESC",
+            "descricao": "Estatísticas por classificação de primeiro parto"
+        },
+        "touros_precoces_produtivos": {
+            "sql": "SELECT * FROM cubo_primeiro_parto_filhas WHERE reproducao_precoce = true AND alta_producao_primeiro_parto = true",
+            "descricao": "Touros que combinam precocidade e alta produção"
+        },
+        "analise_qualidade_leite": {
+            "sql": "SELECT nome_touro, percentual_gordura_medio, percentual_proteina_medio, media_producao_primeiro_parto FROM cubo_primeiro_parto_filhas WHERE boa_qualidade_gordura = true AND boa_qualidade_proteina = true ORDER BY media_producao_primeiro_parto DESC",
+            "descricao": "Touros com filhas produzindo leite de alta qualidade"
+        },
+        "consistencia_genetica": {
+            "sql": "SELECT nivel_consistencia, COUNT(*) as total, ROUND(AVG(media_producao_primeiro_parto), 2) as media FROM cubo_primeiro_parto_filhas GROUP BY nivel_consistencia ORDER BY media DESC",
+            "descricao": "Análise de consistência genética por nível"
+        },
+        "precocidade_reprodutiva": {
+            "sql": "SELECT classificacao_precocidade, COUNT(*) as total, ROUND(AVG(media_idade_primeiro_parto_meses), 1) as idade_media FROM cubo_primeiro_parto_filhas GROUP BY classificacao_precocidade ORDER BY idade_media ASC",
+            "descricao": "Análise de precocidade reprodutiva por classificação"
+        }
+    },
+    "casos_uso_comuns": {
+        "selecao_touros_elite": "Usar alta_producao_primeiro_parto = true AND amostra_representativa = true para seleção de reprodutores elite",
+        "melhoramento_precocidade": "Filtrar por reproducao_precoce = true para acelerar idade ao primeiro parto no rebanho",
+        "consistencia_genetica": "Usar genetica_consistente = true para touros com herança previsível",
+        "qualidade_leite": "Combinar boa_qualidade_gordura = true AND boa_qualidade_proteina = true para melhorar composição do leite",
+        "analise_representatividade": "Usar amostra_representativa = true para análises estatisticamente confiáveis",
+        "benchmarking_primeiro_parto": "Comparar media_producao_primeiro_parto entre touros do mesmo nível de representatividade"
+    },
+    "vantagens_cubo": [
+        "Foco específico no primeiro parto - métrica crítica para seleção genética",
+        "Campos pré-calculados aceleram consultas de performance",
+        "Classificações automáticas facilitam seleção de reprodutores",
+        "Indicadores booleanos permitem filtros rápidos e combinados",
+        "Métricas de consistência avaliam previsibilidade genética",
+        "Análise de precocidade reprodutiva para otimização do rebanho",
+        "Dados de qualidade do leite para seleção comercial",
+        "View virtual sempre atualizada sem armazenamento adicional"
+    ],
+    "limitacoes": [
+        "Baseado na primeira lactação registrada como aproximação do primeiro parto",
+        "Requer mínimo de 2 filhas por touro para inclusão no cubo",
+        "Não considera fatores ambientais que influenciam o primeiro parto",
+        "Dados dependem da qualidade dos registros de lactação e genealogia"
+    ],
+    "integracoes": {
+        "fonte_principal": "fichalactacao + ocorrenciaevento (primeiro parto)",
+        "fonte_genealogica": "associacaobovino + bovino (relação pai-filha)",
+        "relacionamento": "JOIN por bovino.id e associacaobovino para identificar filhas",
+        "atualizacao": "Automática via view - reflete mudanças nas fontes",
+        "compatibilidade": "Complementa cubo_producao_touro_filhas com foco específico no primeiro parto"
+    },
+    "exemplos_consultas_rapidas": {
+        "media_touro_especifico": {
+            "pergunta": "Qual a média de lactação ao primeiro parto das filhas do Touro00370?",
+            "query": "SELECT media_producao_primeiro_parto FROM cubo_primeiro_parto_filhas WHERE codigo_touro = 'FSC00370'",
+            "resposta_exemplo": "8.189,24 litros"
+        },
+        "melhor_touro_primeiro_parto": {
+            "pergunta": "Qual touro tem a maior média de primeiro parto?",
+            "query": "SELECT nome_touro, media_producao_primeiro_parto FROM cubo_primeiro_parto_filhas ORDER BY media_producao_primeiro_parto DESC LIMIT 1",
+            "resposta_exemplo": "Touro00271 com 13.217,25 litros"
+        },
+        "touros_precoces": {
+            "pergunta": "Quais touros têm filhas com primeiro parto precoce e alta produção?",
+            "query": "SELECT nome_touro FROM cubo_primeiro_parto_filhas WHERE reproducao_precoce = true AND alta_producao_primeiro_parto = true",
+            "resposta_exemplo": "Lista de touros que combinam precocidade e produção"
+        }
+    }
+}
