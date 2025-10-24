@@ -1,0 +1,257 @@
+{
+  "tabela": "cubo_producao_touro_descendentes",
+  "descricao": "Cubo otimizado para análise de performance de touros baseada em todos os descendentes (filhas + netas)",
+  "versao": "1.0",
+  "criado_em": "2025-10-23",
+  "total_registros": 217,
+  "estatisticas_gerais": {
+    "touros_elite": 10,
+    "touros_com_netas": 1,
+    "touros_amostra_significativa": 92,
+    "producao_min_litros": 544.34,
+    "producao_max_litros": 13217.25,
+    "producao_media_litros": 7241.71
+  },
+  "campos_principais": {
+    "identificacao": {
+      "codigo_touro": {
+        "tipo": "VARCHAR",
+        "descricao": "Código único do touro reprodutor",
+        "exemplo": "FSC00271",
+        "uso": "Identificação primária para busca específica"
+      },
+      "nome_touro": {
+        "tipo": "VARCHAR",
+        "descricao": "Nome legível do touro reprodutor",
+        "exemplo": "Touro00271",
+        "uso": "Apresentação em relatórios"
+      }
+    },
+    "contadores_descendencia": {
+      "total_descendentes": {
+        "tipo": "INTEGER",
+        "descricao": "Total de descendentes (filhas + netas) com dados",
+        "exemplo": 9,
+        "uso": "Avaliar representatividade estatística"
+      },
+      "filhas_diretas": {
+        "tipo": "INTEGER",
+        "descricao": "Número de filhas diretas do touro",
+        "exemplo": 8,
+        "uso": "Análise de impacto direto"
+      },
+      "netas": {
+        "tipo": "INTEGER",
+        "descricao": "Número de netas (filhas das filhas)",
+        "exemplo": 1,
+        "uso": "Análise de persistência genética"
+      },
+      "percentual_com_producao": {
+        "tipo": "DECIMAL",
+        "descricao": "Percentual de descendentes com dados de produção",
+        "exemplo": 88.89,
+        "uso": "Avaliar taxa de sucesso reprodutivo"
+      }
+    },
+    "metricas_producao": {
+      "media_leite_305d": {
+        "tipo": "DECIMAL",
+        "descricao": "Média de produção 305 dias de todos os descendentes (em litros)",
+        "exemplo": 13217.0,
+        "uso": "Principal métrica de performance genética",
+        "importancia": "CRITICA"
+      },
+      "min_leite_305d": {
+        "tipo": "DECIMAL",
+        "descricao": "Menor produção 305d entre descendentes",
+        "exemplo": 3136.26,
+        "uso": "Avaliar pior caso genético"
+      },
+      "max_leite_305d": {
+        "tipo": "DECIMAL",
+        "descricao": "Maior produção 305d entre descendentes",
+        "exemplo": 11364.7,
+        "uso": "Avaliar potencial genético máximo"
+      },
+      "media_producao_vitalicia": {
+        "tipo": "DECIMAL",
+        "descricao": "Média da produção total vitalícia dos descendentes",
+        "exemplo": 13217.0,
+        "uso": "Avaliar longevidade produtiva"
+      }
+    },
+    "analise_geracional": {
+      "media_filhas_305d": {
+        "tipo": "DECIMAL",
+        "descricao": "Média específica das filhas diretas (305d)",
+        "exemplo": 13217.0,
+        "uso": "Comparação entre gerações"
+      },
+      "media_netas_305d": {
+        "tipo": "DECIMAL",
+        "descricao": "Média específica das netas (305d)",
+        "exemplo": "null (poucos touros têm netas)",
+        "uso": "Avaliar consistência genética geracional"
+      }
+    }
+  },
+  "campos_calculados": {
+    "classificacoes": {
+      "categoria_producao_305d": {
+        "tipo": "VARCHAR",
+        "descricao": "Classificação automática baseada na média de produção",
+        "valores": [
+          "ELITE_SUPERIOR (≥12.000L)",
+          "ELITE_PRODUCAO (≥11.000L)",
+          "ALTA_PRODUCAO (≥10.000L)",
+          "BOA_PRODUCAO (≥9.000L)",
+          "PRODUCAO_REGULAR (≥8.000L)",
+          "PRODUCAO_BAIXA (<8.000L)"
+        ],
+        "uso": "Filtrar touros por nível de performance",
+        "importancia": "ALTA"
+      },
+      "nivel_representatividade": {
+        "tipo": "VARCHAR",
+        "descricao": "Confiabilidade estatística baseada no número de descendentes",
+        "valores": [
+          "MUITO_ALTA_REPRESENTATIVIDADE (≥20 desc.)",
+          "ALTA_REPRESENTATIVIDADE (≥10 desc.)",
+          "MEDIA_REPRESENTATIVIDADE (≥5 desc.)",
+          "BAIXA_REPRESENTATIVIDADE (≥2 desc.)",
+          "REPRESENTATIVIDADE_MINIMA (<2 desc.)"
+        ],
+        "uso": "Filtrar por confiabilidade dos dados"
+      },
+      "tipo_descendencia": {
+        "tipo": "VARCHAR",
+        "descricao": "Tipo de dados disponíveis para análise",
+        "valores": [
+          "MULTIGERACIONAL (filhas + netas)",
+          "APENAS_FILHAS (só filhas diretas)",
+          "APENAS_NETAS (só netas)",
+          "SEM_DESCENDENTES (sem dados)"
+        ],
+        "uso": "Filtrar por tipo de análise possível"
+      },
+      "consistencia_geracional": {
+        "tipo": "VARCHAR",
+        "descricao": "Análise de consistência entre filhas e netas",
+        "valores": [
+          "NAO_APLICAVEL (sem netas)",
+          "CONSISTENTE_ENTRE_GERACOES (diferença ≤500L)",
+          "FILHAS_SUPERIORES (filhas > netas)",
+          "NETAS_SUPERIORES (netas > filhas)"
+        ],
+        "uso": "Avaliar estabilidade genética"
+      },
+      "variabilidade_genetica": {
+        "tipo": "VARCHAR",
+        "descricao": "Consistência da herança baseada no desvio padrão",
+        "valores": [
+          "BAIXA_VARIABILIDADE (≤1.000L desvio)",
+          "MEDIA_VARIABILIDADE (≤2.000L desvio)",
+          "ALTA_VARIABILIDADE (>2.000L desvio)"
+        ],
+        "uso": "Avaliar previsibilidade genética"
+      },
+      "performance_longevidade": {
+        "tipo": "VARCHAR",
+        "descricao": "Comparação entre produção 305d e vitalícia",
+        "valores": [
+          "LONGEVIDADE_EXCEPCIONAL (+3.000L vitalícia)",
+          "EXCELENTE_LONGEVIDADE (+2.000L vitalícia)",
+          "BOA_LONGEVIDADE (+1.000L vitalícia)",
+          "LONGEVIDADE_NORMAL (pequena diferença)",
+          "LONGEVIDADE_BAIXA (vitalícia menor)"
+        ],
+        "uso": "Selecionar para rebanhos de longa duração"
+      },
+      "qualidade_componentes": {
+        "tipo": "VARCHAR",
+        "descricao": "Qualidade do leite baseada em gordura e proteína",
+        "valores": [
+          "EXCELENTE_QUALIDADE (≥4.0% gord, ≥3.5% prot)",
+          "ALTA_QUALIDADE (≥3.5% gord, ≥3.2% prot)",
+          "BOA_QUALIDADE (≥3.0% gord, ≥3.0% prot)",
+          "QUALIDADE_REGULAR (abaixo dos limites)"
+        ],
+        "uso": "Seleção para qualidade do leite"
+      }
+    },
+    "indicadores_boolean": {
+      "tem_amostra_significativa": {
+        "tipo": "BOOLEAN",
+        "descricao": "Indica se tem ≥5 descendentes (dados confiáveis)",
+        "uso": "Filtrar touros com estatística confiável"
+      },
+      "tem_netas": {
+        "tipo": "BOOLEAN",
+        "descricao": "Indica se o touro possui netas registradas",
+        "uso": "Filtrar para análise multigeracional"
+      },
+      "producao_elite": {
+        "tipo": "BOOLEAN",
+        "descricao": "Indica se média dos descendentes > 11.000L",
+        "uso": "Identificar touros de elite rapidamente"
+      },
+      "longevidade_superior": {
+        "tipo": "BOOLEAN",
+        "descricao": "Indica se produção vitalícia > 305d + 1.000L",
+        "uso": "Selecionar para longevidade produtiva"
+      },
+      "excelente_qualidade_leite": {
+        "tipo": "BOOLEAN",
+        "descricao": "Indica alta gordura (>3.5%) E alta proteína (>3.2%)",
+        "uso": "Seleção para qualidade premium do leite"
+      }
+    }
+  },
+  "queries_exemplo": {
+    "ranking_geral": {
+      "sql": "SELECT codigo_touro, nome_touro, media_leite_305d, total_descendentes, categoria_producao_305d FROM cubo_producao_touro_descendentes ORDER BY media_leite_305d DESC LIMIT 10",
+      "descricao": "Top 10 touros por produção média dos descendentes"
+    },
+    "touros_elite_confiaveis": {
+      "sql": "SELECT * FROM cubo_producao_touro_descendentes WHERE categoria_producao_305d IN ('ELITE_SUPERIOR', 'ELITE_PRODUCAO') AND tem_amostra_significativa = true",
+      "descricao": "Touros de elite com dados estatisticamente confiáveis"
+    },
+    "analise_multigeracional": {
+      "sql": "SELECT * FROM cubo_producao_touro_descendentes WHERE tipo_descendencia = 'MULTIGERACIONAL' ORDER BY media_leite_305d DESC",
+      "descricao": "Touros com filhas E netas para análise completa"
+    },
+    "touros_consistentes": {
+      "sql": "SELECT * FROM cubo_producao_touro_descendentes WHERE variabilidade_genetica = 'BAIXA_VARIABILIDADE' AND tem_amostra_significativa = true",
+      "descricao": "Touros com transmissão genética consistente"
+    },
+    "qualidade_premium": {
+      "sql": "SELECT * FROM cubo_producao_touro_descendentes WHERE excelente_qualidade_leite = true AND producao_acima_10mil = true",
+      "descricao": "Touros para produção + qualidade premium"
+    },
+    "longevidade_produtiva": {
+      "sql": "SELECT * FROM cubo_producao_touro_descendentes WHERE performance_longevidade IN ('LONGEVIDADE_EXCEPCIONAL', 'EXCELENTE_LONGEVIDADE')",
+      "descricao": "Touros cujos descendentes mantêm alta produção por mais tempo"
+    },
+    "busca_especifica": {
+      "sql": "SELECT * FROM cubo_producao_touro_descendentes WHERE codigo_touro = 'FSC00271'",
+      "descricao": "Buscar dados completos de um touro específico"
+    }
+  },
+  "dicas_uso": [
+    "SEMPRE use 'tem_amostra_significativa = true' para dados confiáveis",
+    "categoria_producao_305d facilita comparações rápidas",
+    "tipo_descendencia indica que tipo de análise é possível",
+    "variabilidade_genetica mostra previsibilidade da herança",
+    "performance_longevidade identifica touros para rebanhos duradouros",
+    "Combine múltiplos critérios para seleção precisa",
+    "Para análise geracional, filtre por 'tem_netas = true'",
+    "qualidade_componentes é crucial para mercados premium"
+  ],
+  "casos_uso_comuns": {
+    "selecao_reprodutores": "Filtrar por categoria_producao_305d = 'ELITE_PRODUCAO' AND tem_amostra_significativa = true",
+    "melhoramento_genetico": "Analisar variabilidade_genetica e consistencia_geracional",
+    "producao_comercial": "Focar em producao_acima_10mil = true com boa representatividade",
+    "mercado_premium": "Usar excelente_qualidade_leite = true",
+    "rebanho_longevidade": "Filtrar por longevidade_superior = true"
+  }
+}
