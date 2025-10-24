@@ -1,9 +1,15 @@
 import { Button } from "@/components/ui/components/Button";
 import Input from "@/components/ui/components/Input";
-import { showErrorToast } from "@/lib/toastify";
+import { showErrorToast, showSuccessToast } from "@/lib/toastify";
 import { Copy } from "lucide-react";
-import React, { useState, type ReactNode } from "react";
+import React, { useRef, useState, type ReactNode } from "react";
 import axios from "axios";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type PerguntaMsg = {
   tipo: "pergunta";
@@ -30,15 +36,43 @@ const Pergunta = ({ children }: { children: ReactNode }) => {
 };
 
 const Resposta = ({ children }: { children: ReactNode }) => {
+  const contentRef = useRef<HTMLParagraphElement>(null);
+
+  const handleCopy = async () => {
+    if (contentRef.current && contentRef.current.textContent) {
+      try {
+        await navigator.clipboard.writeText(contentRef.current.textContent);
+
+        showSuccessToast("Copiado!");
+      } catch (err) {
+        showErrorToast("Erro ao copiar!");
+      }
+    }
+  };
+
   return (
     <div className="w-full flex-col gap-2">
       <div className="flex flex-col gap-4">
-        <p className="text-lg">{children}</p>
+        <p ref={contentRef} className="text-lg">
+          {children}
+        </p>
       </div>
       <div className="flex gap-2">
-        <Button size="icon" className="size-8" variant="ghost">
-          <Copy size={22} />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              size="icon"
+              className="size-8"
+              variant="ghost"
+              onClick={handleCopy}
+            >
+              <Copy size={22} />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Copiar</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </div>
   );
