@@ -1,0 +1,131 @@
+[
+    {
+        "tabela": "cubo_genealogia",
+        "descricao": "Cubo otimizado para consultas genealógicas bovinas",
+        "campos": {
+            "animal_codigo": {
+                "tipo": "VARCHAR",
+                "descricao": "Código único do animal",
+                "exemplo": "FSC00370"
+            },
+            "animal_nome": {
+                "tipo": "VARCHAR",
+                "descricao": "Nome do animal",
+                "exemplo": "Touro00370"
+            },
+            "animal_sexo": {
+                "tipo": "CHAR(1)",
+                "descricao": "M=Macho, F=Fêmea",
+                "valores": ["M", "F"]
+            },
+            "animal_raca": {
+                "tipo": "VARCHAR",
+                "descricao": "Raça do animal",
+                "exemplo": "Raça 01"
+            },
+            "pai_codigo": {
+                "tipo": "VARCHAR",
+                "descricao": "Código do pai",
+                "exemplo": "FSC04078"
+            },
+            "pai_nome": {
+                "tipo": "VARCHAR",
+                "descricao": "Nome do pai",
+                "exemplo": "Touro04078"
+            },
+            "mae_codigo": {
+                "tipo": "VARCHAR",
+                "descricao": "Código da mãe",
+                "exemplo": "FSC56314"
+            },
+            "mae_nome": {
+                "tipo": "VARCHAR",
+                "descricao": "Nome da mãe",
+                "exemplo": "Vaca56314"
+            },
+            "avo_paterno_codigo": {
+                "tipo": "VARCHAR",
+                "descricao": "Avô paterno (pai do pai)",
+                "exemplo": "FSC00370"
+            },
+            "avo_paterno_nome": {
+                "tipo": "VARCHAR",
+                "descricao": "Nome do avô paterno",
+                "exemplo": "Touro00370"
+            },
+            "avo_materno_codigo": {
+                "tipo": "VARCHAR",
+                "descricao": "Avô materno (pai da mãe)",
+                "exemplo": "FSC00194"
+            },
+            "avo_materno_nome": {
+                "tipo": "VARCHAR",
+                "descricao": "Nome do avô materno",
+                "exemplo": "Touro00194"
+            },
+            "tem_pai": {
+                "tipo": "BOOLEAN",
+                "descricao": "Animal tem pai identificado",
+                "valores": [true, false]
+            },
+            "tem_mae": {
+                "tipo": "BOOLEAN",
+                "descricao": "Animal tem mãe identificada",
+                "valores": [true, false]
+            },
+            "e_pai": {
+                "tipo": "BOOLEAN",
+                "descricao": "Animal é pai de outros",
+                "valores": [true, false]
+            },
+            "e_mae": {
+                "tipo": "BOOLEAN",
+                "descricao": "Animal é mãe de outros",
+                "valores": [true, false]
+            },
+            "numero_filhos_machos": {
+                "tipo": "INTEGER",
+                "descricao": "Quantidade de filhos machos",
+                "exemplo": 5
+            },
+            "numero_filhas_femeas": {
+                "tipo": "INTEGER",
+                "descricao": "Quantidade de filhas fêmeas",
+                "exemplo": 12
+            },
+            "total_filhos": {
+                "tipo": "INTEGER",
+                "descricao": "Total de filhos",
+                "exemplo": 17
+            },
+            "categoria_reprodutiva": {
+                "tipo": "VARCHAR",
+                "descricao": "Categoria reprodutiva do animal",
+                "valores": [
+                    "TOURO_REPRODUTOR",
+                    "TOURO_SEM_FILHOS",
+                    "VACA_MAE",
+                    "VACA_SEM_FILHOS"
+                ]
+            },
+            "nivel_genealogico": {
+                "tipo": "VARCHAR",
+                "descricao": "Nível de informação genealógica disponível",
+                "valores": [
+                    "GENEALOGIA_COMPLETA",
+                    "GENEALOGIA_PARCIAL",
+                    "GENEALOGIA_MINIMA"
+                ]
+            }
+        },
+        "queries_exemplo": {
+            "touros_reprodutores": "SELECT animal_codigo, animal_nome FROM cubo_genealogia WHERE categoria_reprodutiva = 'TOURO_REPRODUTOR' LIMIT 10",
+            "animais_com_pais": "SELECT animal_codigo, animal_nome, pai_nome, mae_nome FROM cubo_genealogia WHERE tem_pai = true AND tem_mae = true LIMIT 10",
+            "buscar_filhos": "SELECT animal_codigo, animal_nome FROM cubo_genealogia WHERE pai_codigo = 'FSC00370' LIMIT 10",
+            "buscar_netos": "SELECT animal_codigo, animal_nome FROM cubo_genealogia WHERE avo_paterno_codigo = 'FSC00370' OR avo_materno_codigo = 'FSC00370' LIMIT 10",
+            "genealogia_completa": "SELECT animal_codigo, animal_nome FROM cubo_genealogia WHERE nivel_genealogico = 'GENEALOGIA_COMPLETA' LIMIT 10",
+            "animais_machos": "SELECT animal_codigo, animal_nome FROM cubo_genealogia WHERE animal_sexo = 'M' LIMIT 10",
+            "animais_femeas": "SELECT animal_codigo, animal_nome FROM cubo_genealogia WHERE animal_sexo = 'F' LIMIT 10"
+        }
+    }
+]
